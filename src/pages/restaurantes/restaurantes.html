@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page1">
-  <ion-card *ngFor='let restaurante of restaurantes' id="restaurantes-card21">
+  <ion-card *ngFor='let restaurante of restaurantes' (click)="seleciona(restaurante)" id="restaurantes-card21">
     <ion-list>
       <ion-item color="none" id="restaurantes-list-item7">
       </ion-item>

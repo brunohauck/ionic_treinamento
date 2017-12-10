@@ -4,15 +4,24 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Pedidos
+      Meus Pedidos
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page2">
-  <ion-list id="pedidos-list5">
-    <ion-item color="none" id="pedidos-list-item10">
-      <ion-icon name="restaurant" item-left></ion-icon>
-      Item
-    </ion-item>
-  </ion-list>
+  <ion-card *ngFor='let cart of carts'>
+      <ion-list id="pedidos-list5">
+          <ion-item color="none" id="pedidos-list-item10">
+            <ion-icon name="restaurant" item-left></ion-icon>
+            Número do peido {{ cart.id }} Valor: R${{ cart.valor_total }} <br />
+            Taxa de entrega: {{ cart.taxa_entrega}}
+          </ion-item>
+        </ion-list>
+        <ion-list *ngFor='let pedido of cart.pedidos' id="pedidos-list5">
+            <ion-item color="none" id="pedidos-list-item10">
+              Cardápio {{ pedido.cardapio.nome }} Valor: R${{ pedido.cardapio.valor }} <br />
+              Quantidade: {{ pedido.quantidade}}
+            </ion-item>
+        </ion-list>
+  </ion-card>
 </ion-content>

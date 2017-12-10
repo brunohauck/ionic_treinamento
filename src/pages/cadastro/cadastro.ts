@@ -20,7 +20,7 @@ export class CadastroPage {
         this.data = {};
         this.data.response = '';
         this.http = http;
-        this.usuario = new Usuario (null, null, null, null);
+        this.usuario = new Usuario (null, null, null, null, null);
   }
 
   submit(){
@@ -33,6 +33,7 @@ export class CadastroPage {
         this.data.response = data._body;
         if(this.data.response == "sucesso"){
           this.navCtrl.push(RestaurantesPage)
+          
         }
 
       }, error =>{

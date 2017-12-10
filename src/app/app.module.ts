@@ -8,7 +8,10 @@ import { MinhaContaPage } from '../pages/minha-conta/minha-conta';
 import { RedesSociaisPage } from '../pages/redes-sociais/redes-sociais';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
-
+import { CardapiosPage } from '../pages/cardapios/cardapios';
+import { SobrePage } from '../pages/sobre/sobre';
+import { FazerpedidoPage } from '../pages/fazerpedido/fazerpedido';
+import { CartPage } from '../pages/cart/cart';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { HttpModule } from '@angular/http';
@@ -24,7 +27,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MinhaContaPage,
     RedesSociaisPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    CardapiosPage,
+    SobrePage,
+    FazerpedidoPage,
+    CartPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MinhaContaPage,
     RedesSociaisPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    CardapiosPage,
+    SobrePage,
+    FazerpedidoPage,
+    CartPage
   ],
   providers: [
     StatusBar,

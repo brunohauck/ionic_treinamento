@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { Restaurante } from '../../domain/restaurante/restaurante';
 import { Http } from '@angular/http';
+import { CardapiosPage } from '../cardapios/cardapios';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class RestaurantesPage {
     let loader = this._loadingCtrl.create({
       content: 'Listando restaurantes. Aguarde ...'
     });
+    //http://192.168.254.9/pedidos/restaurante/get_restaurante
+    //http://marmita.idsgeo.com/index.php/page/get_ionic
     loader.present();
     this._http
       .get('http://marmita.idsgeo.com/index.php/page/get_ionic')
@@ -33,6 +36,7 @@ export class RestaurantesPage {
       })
       .catch(err => {
         console.log(err);
+        loader.dismiss();
         this._alertCtrl
         .create({
           title: 'Falha na conexão',
@@ -43,6 +47,7 @@ export class RestaurantesPage {
   }  
   seleciona(restaurante){
     console.log('Entrou na Action seleciona');
+    this.navCtrl.setRoot(CardapiosPage, { restauranteSelecionado: restaurante });
   }
 
 }

@@ -9,20 +9,31 @@
   <ion-content id="side-menu21">
     <ion-list id="menu-list1">
       <ion-item color="none" menuClose="" on-click="goToRestaurantes()" id="menu-list-item1">
+        <ion-icon ios="ios-restaurant" md="md-restaurant"></ion-icon>
         Restaurantes
       </ion-item>
       <ion-item color="none" menuClose="" on-click="goToPedidos()" id="menu-list-item2">
+        <ion-icon name="reorder"></ion-icon>
         Pedidos
       </ion-item>
       <ion-item color="none" menuClose="" on-click="goToMinhaConta()" id="menu-list-item3">
+          <ion-icon ios="ios-person" md="md-restaurant"></ion-icon>
         Minha conta
       </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToCart()" id="menu-list-item3">
+          <ion-icon name="cart"></ion-icon>
+        Carrinho
+      </ion-item>
       <ion-item color="none" menuClose="" on-click="goToRedesSociais()" id="menu-list-item4">
-        <ion-icon name="facebook" item-left></ion-icon>
+          <ion-icon name="logo-linkedin"></ion-icon>
         Redes sociais
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToSobre()" id="menu-list-item5">
+          <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+        Sobre
       </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav #mainContent [root]="rootPage"></ion-nav>
+<ion-nav #mainContent [root]="rootPage" persistent=“true”></ion-nav>
