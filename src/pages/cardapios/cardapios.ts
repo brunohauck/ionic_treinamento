@@ -37,6 +37,7 @@ export class CardapiosPage{
             .toPromise()
             .then( cardapios => {
                 this.cardapios = cardapios;
+				console.log(this.cardapios);
                 loader.dismiss();
             })
             .catch(err =>{
@@ -52,7 +53,7 @@ export class CardapiosPage{
      }
      submit(cardapio){
         console.log(cardapio.nome);
-        this.navCtrl.push(FazerpedidoPage, {cardapioSelecionado: cardapio});
+        this.navCtrl.setRoot(FazerpedidoPage, {cardapioSelecionado: cardapio});
      }
 
  } 

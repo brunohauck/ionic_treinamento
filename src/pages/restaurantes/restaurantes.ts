@@ -11,6 +11,7 @@ import { CardapiosPage } from '../cardapios/cardapios';
 })
 export class RestaurantesPage {
 
+  searchTerm: string = '';	
   public restaurantes: Restaurante[];
   constructor(
     public navCtrl: NavController,
@@ -19,8 +20,10 @@ export class RestaurantesPage {
     private _alertCtrl: AlertController ) { }
   
   ngOnInit(){
-
-    let loader = this._loadingCtrl.create({
+	this.requestHttpRestaurantes();
+  }
+  requestHttpRestaurantes(){
+	let loader = this._loadingCtrl.create({
       content: 'Listando restaurantes. Aguarde ...'
     });
     //http://192.168.254.9/pedidos/restaurante/get_restaurante
@@ -44,10 +47,23 @@ export class RestaurantesPage {
           subTitle: 'Não foi possível obter a lista de restaurantes. Tente novamente.'
         }).present();
       });
-  }  
+  } 
+     
   seleciona(restaurante){
     console.log('Entrou na Action seleciona');
     this.navCtrl.setRoot(CardapiosPage, { restauranteSelecionado: restaurante });
+  }
+  setFilteredItems() { 
+	this.restaurantes = this.filterItems(this.searchTerm);	
+  }  
+  filterItems(searchTerm){
+	if (searchTerm && searchTerm.trim() != '') {  
+		return this.restaurantes.filter((restaurante: any) => {
+			return restaurante.nome.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+		});    
+	}else{
+		this.requestHttpRestaurantes();
+	}	
   }
 
 }

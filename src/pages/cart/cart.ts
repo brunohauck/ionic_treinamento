@@ -37,17 +37,16 @@ export class CartPage {
     this.url = "http://marmita.idsgeo.com/index.php/page/cadastrar_pedido_ionic_cart";
   }
   ngOnInit(){
-    console.log(sessionStorage.getItem('usuarioId'));
-    console.log(sessionStorage.getItem('usuarioLogado'));
+
     //this.pedido.usuario = new Usuario(sessionStorage.getItem('usuarioId'),"Bruno Hauck",sessionStorage.getItem('usuarioLogado'),null,null)
     if(sessionStorage.getItem('flagLogado')!="sim"){
       this.goToLogin();
     }
+    // Recupera o carrinho da sessão
     if(sessionStorage.getItem('cart')){
-      //console.log(sessionStorage.getItem('cart'))
       this.cart = JSON.parse(sessionStorage.getItem('cart'))
     }
-    else{
+    else{      
       console.log("Carrinho vazio");
     } 
   }
@@ -57,7 +56,42 @@ export class CartPage {
   goToRestaurantes(){   
     this.navCtrl.setRoot(RestaurantesPage);
   }
+  // Função para tratar incluir e excluir itens do carrinho
+  private updateQuantity(index,amount){
+    // se quantidade for maior que zero
+  	if (this.cart.pedidos[index].quantidade + amount > 0) {
+      // se for retirar ou incluir item do carrinho tem que alterar o valor total
+      if(amount==-1){
+        this.cart.valor_total = this.cart.valor_total*1 - this.cart.pedidos[index].cardapio.preco*1;
+      }else{
+        this.cart.valor_total = this.cart.valor_total*1 + this.cart.pedidos[index].cardapio.preco*1;
+      }
+      // Aumenta ou diminui a quantidade
+      this.cart.pedidos[index].quantidade = this.cart.pedidos[index].quantidade + amount;
+      // Grava o carrinho na sessão novamente
+      sessionStorage.setItem("cart", JSON.stringify(this.cart));       
+    } 
+    else if (this.cart.pedidos[index].quantidade + amount === 0) {
+      // se a quantidade for igual a zero retira o item do carrinho    
+      this.cart.valor_total = this.cart.valor_total*1 - this.cart.pedidos[index].cardapio.preco*1; 
+      this.cart.pedidos.splice(index, 1);
+      // Grava o carrinho na sessão novamente
+      sessionStorage.setItem("cart", JSON.stringify(this.cart));
+    }else {
+  		return;
+  	}
+  }    
+  increaseQuantity(index) {
+    // função para adicionar item no carrinho
+    this.updateQuantity(index,1);
+  }
+  decreaseQuantity(index) {
+    // função para remover o item do carrinho
+  	this.updateQuantity(index,-1);
+  }
+  
   checkout(){
+    // função de checkout via http
     var data = JSON.stringify(this.cart);  
 	  console.log(data)
     this.http.post(this.url, data)
@@ -78,10 +112,5 @@ export class CartPage {
             subTitle: 'Não foi possível salvar o pedido. Tente novamente.'
           }).present();
       });
-  
-	
   }
-	
- 
-
 }

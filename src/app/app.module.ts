@@ -19,6 +19,10 @@ import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { LOCALE_ID } from '@angular/core';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -55,6 +59,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
